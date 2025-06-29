@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env/
+venv/
+.venv
+.env
+*.jsonl
+results/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
