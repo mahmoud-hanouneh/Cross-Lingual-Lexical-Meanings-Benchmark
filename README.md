@@ -85,6 +85,15 @@ This script will connect to the BabelNet API and generate the `csi_benchmark_adv
 python generate_csi_benchmark.py
 ```
 
+Practically, generating the whole dataset using BabelNet API is not possible as shortly we'll hit the API requests limitation. Such large datasets used for benchmarks are usually generated from the local setup of BabelNet. To set up the local environment, follow the instructions in BabelNet documentations at PYTHON API section and create the RPC Server [BabelNet Python API]('https://babelnet.org/guide')
+
+#### BabelNet RPC Server
+
+```bash
+# No need for API key at this case, however, a lisence to get the local copy of BabekNet dataset is required.
+python scripts/generate_csi_benchmark_local.py
+```
+
 ### Phase 2: Running the Evaluation
 
 It's time to run the evaluation. Make sure the data was generated correctly and quickly take a look at the quality of the questions, answers and distractors.

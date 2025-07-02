@@ -8,7 +8,7 @@ from babelnet.pos import POS
 from babelnet.data.source import BabelSenseSource
 from babelnet.data.relation import BabelPointer
 from babelnet.resources import BabelSynsetID
-
+from seed_words import SEED_WORDS_WITH_POS
 # Configuration - No need for API key
 # The babelnet_conf.yml file handles the connection.
 
@@ -18,11 +18,16 @@ SOURCE_LANGUAGE_STR = "EN"
 
 
 # Will be extended later 
-SEED_WORDS_WITH_POS = [
-    ("house", "NOUN"), ("water", "NOUN"), ("sun", "NOUN"), ("tree", "NOUN"),
-    ("eat", "VERB"), ("walk", "VERB"), ("see", "VERB"),
-    ("big", "ADJ"), ("small", "ADJ"), ("happy", "ADJ"), ("sad", "ADJ")
-]
+# SEED_WORDS_WITH_POS = [
+#     ("house", "NOUN"), ("water", "NOUN"), ("sun", "NOUN"), ("tree", "NOUN"),
+#     ("eat", "VERB"), ("walk", "VERB"), ("see", "VERB"),
+#     ("big", "ADJ"), ("small", "ADJ"), ("happy", "ADJ"), ("sad", "ADJ")
+# ]
+# SEED_WORDS_WITH_POS = [
+#     ("house", "NOUN"), ("water", "NOUN"), ("sun", "NOUN"), ("tree", "NOUN"),
+#     ("eat", "VERB"), ("walk", "VERB"), ("see", "VERB"),
+#     ("big", "ADJ"), ("small", "ADJ"), ("happy", "ADJ"), ("sad", "ADJ")
+# ]
 
 
 def get_primary_synset(word, pos, lang_enum):
