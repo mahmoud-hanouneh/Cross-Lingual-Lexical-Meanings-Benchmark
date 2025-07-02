@@ -1,6 +1,6 @@
 # Multilingual Lexical Benchmark for Evaluating Large Language Models LLMs
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.8](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Project Description
@@ -39,6 +39,24 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+Install the correct version of PyTorch.
+The official PyTorch website provides a tool to generate the exact installation command you need. Go to the website [PyTorch](https://pytorch.org/get-started/locally/) and select your sysetm configuration.
+
+_NOTE!_ Local BabelNet works ONLY with Python 3.8, therefore we should select Platform to be 11.8 - CUDA 12.1 (This is the latest and most common version; if you have an older GPU, or in our case working in Python 3.8, we must select CUDA 11.8)
+
+```bash
+# the command on windows will look like
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+```
+
+_IMPORTANT!_ If you get an error saying AssertionError: Torch not compiled with CUDA enabled, you might have to uninstall the old CPU torch version by running the following command and then reinstall PyTorch/
+
+```bash
+pip uninstall torch
+
+```
+
 ### 2. API Key Setup
 
 The data generation script requires a BabelNet API key.
@@ -59,6 +77,8 @@ The project is divided into two main phases: Data Generation and Evaluation.
 This is critical part, where we generate our data to evaluate LLMs. I'm still actively working on enhancing the quality of this script. The `Cross-Lingual Synonym Identification` still the stable task until the moment as it was tested on many LLMs.
 
 This script will connect to the BabelNet API and generate the `csi_benchmark_advanced.jsonl` file in the `data/` directory. It is assumed the final, advanced generation script is named `generate_csi_benchmark.py`.
+
+#### BabelNet API
 
 ```bash
 # Make sure your .env file is set up with your API key in the root of the project.

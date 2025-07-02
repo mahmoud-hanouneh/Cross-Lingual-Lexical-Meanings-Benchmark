@@ -134,7 +134,7 @@ for word_to_translate, part_of_speech in SEED_WORDS_WITH_POS:
         task_counter += 1
         data_point = {
             "task_id": f"CSI-{SOURCE_LANGUAGE_STR}-{lang_code}-{task_counter:03d}",
-            "task_type": "cross_lingual_synonym_identification",
+            "task_type": "csi_custom_task",
             "source_word": word_to_translate,
             "source_lang": SOURCE_LANGUAGE_STR,
             "target_lang": lang_code,
