@@ -8,32 +8,20 @@ from babelnet.pos import POS
 from babelnet.data.source import BabelSenseSource
 from babelnet.data.relation import BabelPointer
 from babelnet.resources import BabelSynsetID
+
 from seed_words import SEED_WORDS_WITH_POS
-# Configuration - No need for API key
-# The babelnet_conf.yml file handles the connection.
-
-TARGET_LANGUAGES = [("DE", "German"), ("FR", "French")]
-SOURCE_LANGUAGE_ENUM = Language.EN 
-SOURCE_LANGUAGE_STR = "EN"  
 
 
-# Will be extended later 
-# SEED_WORDS_WITH_POS = [
-#     ("house", "NOUN"), ("water", "NOUN"), ("sun", "NOUN"), ("tree", "NOUN"),
-#     ("eat", "VERB"), ("walk", "VERB"), ("see", "VERB"),
-#     ("big", "ADJ"), ("small", "ADJ"), ("happy", "ADJ"), ("sad", "ADJ")
-# ]
-# SEED_WORDS_WITH_POS = [
-#     ("house", "NOUN"), ("water", "NOUN"), ("sun", "NOUN"), ("tree", "NOUN"),
-#     ("eat", "VERB"), ("walk", "VERB"), ("see", "VERB"),
-#     ("big", "ADJ"), ("small", "ADJ"), ("happy", "ADJ"), ("sad", "ADJ")
-# ]
+TARGET_LANGUAGES = [("DE", "German"), ("FR", "French")] # To be extended 
+SOURCE_LANGUAGE_ENUM = Language.EN
+SOURCE_LANGUAGE_STR = "EN"
+
 
 
 def get_primary_synset(word, pos, lang_enum):
     # This func finds the most relevant BabelSynset object for a word using the local library
     try:
-        # Call library function directly 
+        # Call library function directly
         synsets = bn.get_synsets(word, from_langs=[lang_enum], poses=[POS[pos]], sources=[BabelSenseSource.WN])
         if synsets:
             return synsets[0].id  # Returning the ID of the synset object
@@ -53,7 +41,7 @@ def get_word_from_synset(synset, target_lang_code):
             return sense.full_lemma.replace("_", " ")
     return None
 
-# The logic here focuses on generating polysomous words for the distractors to make the benchmark more efficient and challenging 
+# The logic here focuses on generating polysomous words for the distractors to make the benchmark more efficient and challenging
 def get_distractors(main_synset, target_lang_code, num_distractors=3):
     
    # Finds semantically related but incorrect words to use as distractors.
@@ -86,13 +74,19 @@ def get_distractors(main_synset, target_lang_code, num_distractors=3):
     return list(distractor_words)
 
 
-#  Main Generation Loop 
-benchmark_data = []
-task_counter = 0
+# Main Generation Loop (edited for per-language file)
 
-for word_to_translate, part_of_speech in SEED_WORDS_WITH_POS:
-    for lang_code, lang_name in TARGET_LANGUAGES:
-        print(f"\nProcessing '{word_to_translate}' ({part_of_speech}) -> {lang_name}...")
+# The outer loop  iterates through each target language
+for lang_code, lang_name in TARGET_LANGUAGES:
+    print(f"\n===== STARTING GENERATION FOR {lang_name.upper()} ({lang_code}) =====\n")
+    
+    # Create a fresh list for each language
+    language_specific_data = []
+    task_counter = 0
+
+    # The inner loop processes all words for the current language
+    for word_to_translate, part_of_speech in SEED_WORDS_WITH_POS:
+        print(f"Processing '{word_to_translate}' ({part_of_speech}) -> {lang_name}...")
 
         # Step A: Get the main concept and the correct answer 
         main_synset = get_primary_synset(word_to_translate, part_of_speech, SOURCE_LANGUAGE_ENUM) #EN
@@ -109,10 +103,9 @@ for word_to_translate, part_of_speech in SEED_WORDS_WITH_POS:
         
         # Step B: Get high-quality, semantically related distractors
         print("  -> Generating semantic distractors...")
-        # distractors = set(get_distractors(main_synset, lang_code, num_distractors=5)) # Get a few extra
-        distractors = set(get_distractors(bn.get_synset(BabelSynsetID(str(main_synset))), lang_code, num_distractors=5)) # Get a few extra
+        distractors = set(get_distractors(bn.get_synset(BabelSynsetID(str(main_synset))), lang_code, num_distractors=5))
 
-        distractors.discard(correct_answer) # Remove the correct answer if it's there - to prevent duplicatoins
+        distractors.discard(correct_answer) # Remove the correct answer if it's there - to prevent duplications
         
         # Fallback strategy in case there are NOT enough semantic distractors
         if len(distractors) < 3:
@@ -147,13 +140,19 @@ for word_to_translate, part_of_speech in SEED_WORDS_WITH_POS:
             "choices": choices,
             "answer": correct_answer
         }
-        benchmark_data.append(data_point)
+        language_specific_data.append(data_point)
 
-# Save the benchmark to a file ---
-output_file = "csi_benchmark_local.jsonl"
-with open(output_file, "w", encoding="utf-8") as f:
-    for item in benchmark_data:
-        f.write(json.dumps(item, ensure_ascii=False) + "\n")
+    # Save the benchmark to a file for the current language
+    if language_specific_data:
+        # Create a unique filename for each language, e.g., "csi_benchmark_DE.jsonl"
+        output_file = f"csi_benchmark_{lang_code}.jsonl"
+        with open(output_file, "w", encoding="utf-8") as f:
+            for item in language_specific_data:
+                f.write(json.dumps(item, ensure_ascii=False) + "\n")
+        print(f"\n--- Language {lang_code} Done ---")
+        print(f"Generated {len(language_specific_data)} examples. Saved to {output_file}")
+    else:
+        print(f"\n--- Language {lang_code} Done ---")
+        print("No examples were generated for this language.")
 
-print(f"\n--- DONE ---")
-print(f"Generated {len(benchmark_data)} examples. Saved to {output_file}")
+print("\n===== ALL LANGUAGES PROCESSED =====\n")
