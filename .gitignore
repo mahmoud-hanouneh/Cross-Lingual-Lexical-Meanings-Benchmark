@@ -6,7 +6,6 @@ venv/
 .env
 *.jsonl
 !data/*.jsonl
-results/
 
 # Ignore OS files
 .DS_Store
