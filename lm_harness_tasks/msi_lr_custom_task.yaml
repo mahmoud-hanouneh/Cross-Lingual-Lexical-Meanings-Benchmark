@@ -1,0 +1,30 @@
+# In lm_harness_tasks/csi_task.yaml
+
+# This name must match the --tasks argument in your command
+task: msi_custom_task_low_resource
+
+# This tells the loader to use the built-in 'json' script for loading files.
+dataset_path: json
+
+# These are the arguments passed directly to the json loader.
+dataset_kwargs:
+  # We explicitly map our file to the "test" split, which the evaluator looks for.
+  data_files:
+    test: "data/msi_benchmark_low_resource.jsonl"
+
+test_split: "test"
+
+# The rest of the file remains the same and was already correct.
+output_type: multiple_choice
+
+doc_to_text: "{{question}}"
+doc_to_choice: "{{choices}}"
+doc_to_target: "{{answer}}"
+
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+
+metadata:
+  version: 1.0
