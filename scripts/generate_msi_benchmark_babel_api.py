@@ -165,7 +165,7 @@ for word_to_translate, part_of_speech in SEED_WORDS_WITH_POS:
         benchmark_data.append(data_point)
 
 # --- 3. Save the benchmark to a file ---
-output_file = "../benchmark/csi_benchmark_advanced.jsonl"
+output_file = "../data/msi_benchmark_advanced.jsonl"
 with open(output_file, "w", encoding="utf-8") as f:
     for item in benchmark_data:
         f.write(json.dumps(item, ensure_ascii=False) + "\n")

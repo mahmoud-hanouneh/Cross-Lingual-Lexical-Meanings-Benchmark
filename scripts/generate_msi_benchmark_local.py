@@ -44,7 +44,7 @@ def get_word_from_synset(synset, target_lang_code):
         return None
     # We can now directly access the senses from the synset object
     for sense in w_f_syn.senses():
-        if sense.language.name.upper() == target_lang_code.upper():
+        if sense.language.name == target_lang_code:
             return sense.full_lemma.replace("_", " ")
     return None
 
