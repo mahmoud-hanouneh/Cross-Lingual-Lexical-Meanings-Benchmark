@@ -10,7 +10,7 @@ dataset_path: json
 dataset_kwargs:
   # We explicitly map our file to the "test" split, which the evaluator looks for.
   data_files:
-    test: "data/msi_benchmark_high_resource_nouns.jsonl"
+    test: "data/msi_benchmark_nouns_high_resource.jsonl"
 
 test_split: "test"
 
