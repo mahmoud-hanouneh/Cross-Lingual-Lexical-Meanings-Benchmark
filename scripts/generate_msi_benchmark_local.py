@@ -14,7 +14,12 @@ from babelnet.data.relation import BabelPointer
 from babelnet.resources import BabelSynsetID
 
 
-from seed_words import SEED_WORDS_WITH_POS
+# from seed_words import SEED_WORDS_WITH_POS
+
+from seed_words import NOUN_SEEDS as SEED_WORDS_WITH_POS
+
+
+
 from language_config import LANGUAGE_CONFIG
 
 #  Configuration
@@ -154,7 +159,7 @@ for tier_name, languages_in_tier in LANGUAGE_CONFIG.items():
             tier_specific_data.append(data_point)
 
     if tier_specific_data:
-        output_file_path = os.path.join(OUTPUT_DIR, f"msi_benchmark_{tier_name}.jsonl")
+        output_file_path = os.path.join(OUTPUT_DIR, f"msi_benchmark_{tier_name}_nouns.jsonl")
         with open(output_file_path, "w", encoding="utf-8") as f:
             for item in tier_specific_data:
                 f.write(json.dumps(item, ensure_ascii=False) + "\n")

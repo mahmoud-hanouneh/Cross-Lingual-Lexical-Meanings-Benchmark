@@ -1,4 +1,5 @@
-SEED_WORDS_WITH_POS = [
+
+NOUN_SEEDS = [
     # --- NOUNS (250 words) ---
     ("time", "NOUN"), ("year", "NOUN"), ("people", "NOUN"), ("way", "NOUN"),
     ("day", "NOUN"), ("man", "NOUN"), ("thing", "NOUN"), ("woman", "NOUN"),
@@ -28,7 +29,9 @@ SEED_WORDS_WITH_POS = [
     ("foot", "NOUN"), ("boy", "NOUN"), ("age", "NOUN"), ("policy", "NOUN"),
     ("process", "NOUN"), ("music", "NOUN"), ("market", "NOUN"), ("sense", "NOUN"),
     ("nation", "NOUN"), ("plan", "NOUN"), ("college", "NOUN"), ("interest", "NOUN"),
+]
 
+VERB_SEEDS = [
     # --- VERBS (200 words) ---
     ("be", "VERB"), ("have", "VERB"), ("do", "VERB"), ("say", "VERB"),
     ("get", "VERB"), ("make", "VERB"), ("go", "VERB"), ("know", "VERB"),
@@ -60,7 +63,9 @@ SEED_WORDS_WITH_POS = [
     ("join", "VERB"), ("agree", "VERB"), ("pick", "VERB"), ("support", "VERB"),
     ("end", "VERB"), ("base", "VERB"), ("produce", "VERB"), ("face", "VERB"),
     ("cover", "VERB"), ("describe", "VERB"), ("teach", "VERB"), ("prepare", "VERB"),
-    
+]
+
+ADJ_SEEDS = [
     # --- ADJECTIVES (150 words) ---
     ("good", "ADJ"), ("new", "ADJ"), ("first", "ADJ"), ("last", "ADJ"),
     ("long", "ADJ"), ("great", "ADJ"), ("little", "ADJ"), ("own", "ADJ"),
