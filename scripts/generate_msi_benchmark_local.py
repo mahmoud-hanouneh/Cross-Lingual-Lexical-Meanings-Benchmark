@@ -16,7 +16,14 @@ from babelnet.resources import BabelSynsetID
 
 # from seed_words import SEED_WORDS_WITH_POS
 
-from seed_words import NOUN_SEEDS as SEED_WORDS_WITH_POS
+# Nouns 
+# from seed_words import NOUN_SEEDS as SEED_WORDS_WITH_POS
+
+# Verbs 
+# from seed_words import VERB_SEEDS as SEED_WORDS_WITH_POS
+# Adjs 
+from seed_words import ADJ_SEEDS as SEED_WORDS_WITH_POS
+
 
 
 
@@ -103,7 +110,7 @@ for tier_name, languages_in_tier in LANGUAGE_CONFIG.items():
         
         for word_to_translate, part_of_speech in SEED_WORDS_WITH_POS:
             #EDIT: Added the detailed print statement back in ---
-            print(f"  -> Processing '{word_to_translate}'...")
+            # print(f"  -> Processing '{word_to_translate}'...")
 
             main_synset_id = get_primary_synset(word_to_translate, part_of_speech, SOURCE_LANGUAGE_ENUM)
             if not main_synset_id:
@@ -152,14 +159,14 @@ for tier_name, languages_in_tier in LANGUAGE_CONFIG.items():
                 "source_word": word_to_translate,
                 "source_lang": SOURCE_LANGUAGE_STR,
                 "target_lang": lang_code,
-                "question": f"Which word has the same meaning as '{word_to_translate}' in {lang_name}?",
+                "question": f"Which word has the same meaning as the '{part_of_speech.lower()}' '{word_to_translate}' in {lang_name}?",
                 "choices": choices,
                 "answer": correct_answer
             }
             tier_specific_data.append(data_point)
 
     if tier_specific_data:
-        output_file_path = os.path.join(OUTPUT_DIR, f"msi_benchmark_{tier_name}_nouns.jsonl")
+        output_file_path = os.path.join(OUTPUT_DIR, f"msi_benchmark_adjs_{tier_name}.jsonl")
         with open(output_file_path, "w", encoding="utf-8") as f:
             for item in tier_specific_data:
                 f.write(json.dumps(item, ensure_ascii=False) + "\n")

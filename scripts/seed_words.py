@@ -1,6 +1,6 @@
 
+# A high-quality list of 250 common English nouns for benchmark generation.
 NOUN_SEEDS = [
-    # --- NOUNS (250 words) ---
     ("time", "NOUN"), ("year", "NOUN"), ("people", "NOUN"), ("way", "NOUN"),
     ("day", "NOUN"), ("man", "NOUN"), ("thing", "NOUN"), ("woman", "NOUN"),
     ("life", "NOUN"), ("child", "NOUN"), ("world", "NOUN"), ("school", "NOUN"),
@@ -29,7 +29,43 @@ NOUN_SEEDS = [
     ("foot", "NOUN"), ("boy", "NOUN"), ("age", "NOUN"), ("policy", "NOUN"),
     ("process", "NOUN"), ("music", "NOUN"), ("market", "NOUN"), ("sense", "NOUN"),
     ("nation", "NOUN"), ("plan", "NOUN"), ("college", "NOUN"), ("interest", "NOUN"),
+    ("death", "NOUN"), ("experience", "NOUN"), ("effect", "NOUN"), ("use", "NOUN"),
+    ("class", "NOUN"), ("control", "NOUN"), ("care", "NOUN"), ("field", "NOUN"),
+    ("development", "NOUN"), ("role", "NOUN"), ("effort", "NOUN"), ("rate", "NOUN"),
+    ("heart", "NOUN"), ("drug", "NOUN"), ("show", "NOUN"), ("leader", "NOUN"),
+    ("light", "NOUN"), ("voice", "NOUN"), ("wife", "NOUN"), ("police", "NOUN"),
+    ("mind", "NOUN"), ("report", "NOUN"), ("decision", "NOUN"), ("son", "NOUN"),
+    ("view", "NOUN"), ("relationship", "NOUN"), ("town", "NOUN"), ("road", "NOUN"),
+    ("arm", "NOUN"), ("difference", "NOUN"), ("value", "NOUN"), ("building", "NOUN"),
+    ("action", "NOUN"), ("position", "NOUN"), ("ground", "NOUN"), ("street", "NOUN"),
+    ("patient", "NOUN"), ("matter", "NOUN"), ("center", "NOUN"), ("couple", "NOUN"),
+    ("table", "NOUN"), ("court", "NOUN"), ("boy", "NOUN"), ("figure", "NOUN"),
+    ("street", "NOUN"), ("image", "NOUN"), ("phone", "NOUN"), ("data", "NOUN"),
+    ("picture", "NOUN"), ("practice", "NOUN"), ("piece", "NOUN"), ("land", "NOUN"),
+    ("product", "NOUN"), ("doctor", "NOUN"), ("wall", "NOUN"), ("patient", "NOUN"),
+    ("worker", "NOUN"), ("news", "NOUN"), ("test", "NOUN"), ("movie", "NOUN"),
+    ("north", "NOUN"), ("love", "NOUN"), ("support", "NOUN"), ("technology", "NOUN"),
+    ("step", "NOUN"), ("baby", "NOUN"), ("computer", "NOUN"), ("type", "NOUN"),
+    ("attention", "NOUN"), ("source", "NOUN"), ("organization", "NOUN"), ("language", "NOUN"),
+    ("story", "NOUN"), ("tree", "NOUN"), ("space", "NOUN"), ("example", "NOUN"),
+    ("paper", "NOUN"), ("group", "NOUN"), ("music", "NOUN"), ("food", "NOUN"),
+    ("knowledge", "NOUN"), ("power", "NOUN"), ("ability", "NOUN"), ("economy", "NOUN"),
+    ("television", "NOUN"), ("science", "NOUN"), ("culture", "NOUN"), ("nature", "NOUN"),
+    ("society", "NOUN"), ("human", "NOUN"), ("history", "NOUN"), ("problem", "NOUN"),
+    ("control", "NOUN"), ("public", "NOUN"), ("law", "NOUN"), ("industry", "NOUN"),
+    ("player", "NOUN"), ("security", "NOUN"), ("thought", "NOUN"), ("bank", "NOUN"),
+    ("sport", "NOUN"), ("sound", "NOUN"), ("subject", "NOUN"), ("officer", "NOUN"),
+    ("road", "NOUN"), ("window", "NOUN"), ("department", "NOUN"), ("agency", "NOUN"),
+    ("college", "NOUN"), ("church", "NOUN"), ("method", "NOUN"), ("data", "NOUN"),
+    ("food", "NOUN"), ("understanding", "NOUN"), ("theory", "NOUN"), ("benefit", "NOUN"),
+    ("quality", "NOUN"), ("question", "NOUN"), ("rock", "NOUN"), ("goal", "NOUN"),
+    ("top", "NOUN"), ("letter", "NOUN"), ("future", "NOUN"), ("animal", "NOUN"),
+    ("fire", "NOUN"), ("earth", "NOUN"), ("field", "NOUN"), ("oil", "NOUN"),
+    ("property", "NOUN"), ("situation", "NOUN"), ("model", "NOUN"), ("risk", "NOUN"),
+    ("character", "NOUN"), ("dog", "NOUN"), ("army", "NOUN"), ("design", "NOUN"),
+    ("material", "NOUN"), ("sun", "NOUN"), ("glass", "NOUN"), ("impact", "NOUN")
 ]
+
 
 VERB_SEEDS = [
     # --- VERBS (200 words) ---
@@ -63,10 +99,25 @@ VERB_SEEDS = [
     ("join", "VERB"), ("agree", "VERB"), ("pick", "VERB"), ("support", "VERB"),
     ("end", "VERB"), ("base", "VERB"), ("produce", "VERB"), ("face", "VERB"),
     ("cover", "VERB"), ("describe", "VERB"), ("teach", "VERB"), ("prepare", "VERB"),
+    ("wear", "VERB"), ("choose", "VERB"), ("return", "VERB"), ("prevent", "VERB"),
+    ("deal", "VERB"), ("fight", "VERB"), ("throw", "VERB"), ("fill", "VERB"),
+    ("represent", "VERB"), ("focus", "VERB"), ("drop", "VERB"), ("plan", "VERB"),
+    ("push", "VERB"), ("cause", "VERB"), ("increase", "VERB"), ("seek", "VERB"),
+    ("exist", "VERB"), ("tell", "VERB"), ("cost", "VERB"), ("sound", "VERB"),
+    ("force", "VERB"), ("pull", "VERB"), ("answer", "VERB"), ("enjoy", "VERB"),
+    ("finish", "VERB"), ("press", "VERB"), ("ride", "VERB"), ("feed", "VERB"),
+    ("admit", "VERB"), ("marry", "VERB"), ("realize", "VERB"), ("save", "VERB"),
+    ("fear", "VERB"), ("protect", "VERB"), ("serve", "VERB"), ("wish", "VERB"),
+    ("measure", "VERB"), ("reveal", "VERB"), ("belong", "VERB"), ("demand", "VERB"),
+    ("remove", "VERB"), ("visit", "VERB"), ("depend", "VERB"), ("catch", "VERB"),
+    ("fly", "VERB"), ("born", "VERB"), ("draw", "VERB"), ("handle", "VERB"),
+    ("hope", "VERB"), ("read", "VERB"), ("roll", "VERB"), ("gain", "VERB"),
+    ("marry", "VERB"), ("lie", "VERB"), ("save", "VERB"), ("shoot", "VERB"),
+    ("close", "VERB"), ("enter", "VERB"), ("share", "VERB"), ("shoot", "VERB"),
 ]
 
 ADJ_SEEDS = [
-    # --- ADJECTIVES (150 words) ---
+    # --- ADJECTIVES (200 words) ---
     ("good", "ADJ"), ("new", "ADJ"), ("first", "ADJ"), ("last", "ADJ"),
     ("long", "ADJ"), ("great", "ADJ"), ("little", "ADJ"), ("own", "ADJ"),
     ("other", "ADJ"), ("old", "ADJ"), ("right", "ADJ"), ("big", "ADJ"),
@@ -92,5 +143,24 @@ ADJ_SEEDS = [
     ("main", "ADJ"), ("green", "ADJ"), ("nice", "ADJ"), ("huge", "ADJ"),
     ("popular", "ADJ"), ("traditional", "ADJ"), ("cultural", "ADJ"), ("black", "ADJ"),
     ("white", "ADJ"), ("sure", "ADJ"), ("sad", "ADJ"), ("real", "ADJ"),
-    ("political", "ADJ"), ("social", "ADJ"), ("national", "ADJ")
+    ("political", "ADJ"), ("social", "ADJ"), ("national", "ADJ"), ("afraid", "ADJ"),
+    ("beautiful", "ADJ"), ("complete", "ADJ"), ("deep", "ADJ"), ("direct", "ADJ"),
+    ("effective", "ADJ"), ("equal", "ADJ"), ("famous", "ADJ"),
+    ("heavy", "ADJ"), ("interesting", "ADJ"), ("key", "ADJ"),
+    ("necessary", "ADJ"), ("normal", "ADJ"), ("obvious", "ADJ"),
+    ("perfect", "ADJ"), ("positive", "ADJ"), ("powerful", "ADJ"), ("primary", "ADJ"),
+    ("quiet", "ADJ"), ("rare", "ADJ"), ("responsible", "ADJ"), ("rich", "ADJ"),
+    ("safe", "ADJ"), ("sorry", "ADJ"), ("standard", "ADJ"),
+    ("strange", "ADJ"), ("successful", "ADJ"), ("sufficient", "ADJ"), ("terrible", "ADJ"),
+    ("tired", "ADJ"), ("tough", "ADJ"), ("typical", "ADJ"), ("useful", "ADJ"),
+    ("actual", "ADJ"), ("additional", "ADJ"), ("aggressive", "ADJ"), ("alive", "ADJ"),
+    ("alone", "ADJ"), ("ancient", "ADJ"), ("angry", "ADJ"), ("annual", "ADJ"),
+    ("anxious", "ADJ"), ("appropriate", "ADJ"), ("ashamed", "ADJ"), ("asleep", "ADJ"),
+    ("aware", "ADJ"), ("basic", "ADJ"), ("brave", "ADJ"), ("brief", "ADJ"),
+    ("bright", "ADJ"), ("brilliant", "ADJ"), ("broad", "ADJ"), ("brown", "ADJ"),
+    ("calm", "ADJ"), ("careful", "ADJ"), ("cheap", "ADJ"), ("chief", "ADJ"),
+    ("civil", "ADJ"), ("clean", "ADJ"), ("clever", "ADJ"), ("comfortable", "ADJ"),
+    ("commercial", "ADJ"), ("confident", "ADJ"), ("conscious", "ADJ"), ("critical", "ADJ"),
+    ("curious", "ADJ"), ("daily", "ADJ"), ("dangerous", "ADJ"), ("dear", "ADJ"),
+    ("decent", "ADJ"), ("delicious", "ADJ"), ("dependent", "ADJ"), ("divine", "ADJ")
 ]
