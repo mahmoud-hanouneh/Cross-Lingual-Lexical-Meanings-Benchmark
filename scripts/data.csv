@@ -1,0 +1,14 @@
+﻿Language Tier,Model,Accuracy
+High Resource,Gemma 3,0.404
+High Resource,Mistral 7B,0.5712
+High Resource,Llama 3,0.494
+High Resource,Qwen 3,0.482
+Medium Resource,Gemma 3,0.355
+Medium Resource,Mistral 7B,0.503
+Medium Resource,Llama 3,0.467
+Medium Resource,Qwen 3,0.448
+Low Resource,Gemma 3,0.339
+Low Resource,Mistral 7B,0.418
+Low Resource,Llama 3,0.39
+Low Resource,Qwen 3,0.39
+
