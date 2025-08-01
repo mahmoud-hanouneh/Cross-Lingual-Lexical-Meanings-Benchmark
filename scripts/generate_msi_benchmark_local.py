@@ -15,15 +15,7 @@ from babelnet.resources import BabelSynsetID
 
 
 # from seed_words import SEED_WORDS_WITH_POS
-
-# Nouns 
-# from seed_words import NOUN_SEEDS as SEED_WORDS_WITH_POS
-
-# Verbs 
-# from seed_words import VERB_SEEDS as SEED_WORDS_WITH_POS
-# Adjs 
-from seed_words import ADJ_SEEDS as SEED_WORDS_WITH_POS
-
+from seed_words import SEED_WORDS_WITH_POS
 
 
 
@@ -37,28 +29,40 @@ OUTPUT_DIR = "./data"
 
 # Helper functions 
 
-def get_primary_synset(word, pos, lang_enum):
-    # This func finds the most relevant BabelSynset object for a word using the local library
+# The function get ALL the senses of a given word and returns the the synset ID with the closest synset to the given word. This is done by checking the lammas if the senses if they match with the target word.
+def get_primary_sense_synset(word, lang_code, pos):
     try:
-        # Call library function directly 
-        synsets = bn.get_synsets(word, from_langs=[lang_enum], poses=[POS[pos]], sources=[BabelSenseSource.WN])
-        if synsets:
-            return synsets[0].id # Returning the ID of the synset object
+        synsets = bn.get_senses(word, from_langs=[Language[lang_code]], poses=[POS[pos]], sources=[BabelSenseSource.WN])
+        if (synsets):
+            for sense in synsets:
+                if sense.full_lemma.lower() == word.lower():
+                    # print('success', word)
+                    return sense.synset_id
+            print(f"No exact full_lemma match for '{word}', returning first sense as fallback.")
+            return synsets[0].synset_id #fallback in case not lemmas match
+            
+
+        else:
+            print(f"No senses found for '{word}' with specified filters.")
     except Exception as e:
-        print(f"    -> Error finding synset for '{word}': {e}")
+        print(f" Error finding senses for '{word}' : {e} ")
     return None
 
-def get_word_from_synset(synset, target_lang_code):
+
+def get_main_sense_from_synset(synset_id, target_lang_code):
     # This function gets the primary word for a given synset object in a target language (via its ID)
-
-    w_f_syn = bn.get_synset(BabelSynsetID(str(synset)))
-    if not w_f_syn:
+    try:
+        synset = bn.get_synset(BabelSynsetID(str(synset_id)))
+        if not synset:
+            return None
+        main_sense = synset.main_sense(Language[target_lang_code])
+        # print(main_sense.full_lemma)
+        # We can now directly access the senses from the synset object
+        if main_sense:
+            return main_sense.full_lemma.replace("_", " ")
+    except Exception as e:
+        print(f"Error retrieving main sense for synset '{synset_id}' in '{target_lang_code}': {e}")
         return None
-    # We can now directly access the senses from the synset object
-    for sense in w_f_syn.senses():
-        if sense.language.name == target_lang_code:
-            return sense.full_lemma.replace("_", " ")
-    return None
 
 # The logic here focuses on generating polysomous words for the distractors to make the benchmark more efficient and challenging 
 def get_distractors(main_synset, target_lang_code, num_distractors=3):
@@ -82,7 +86,7 @@ def get_distractors(main_synset, target_lang_code, num_distractors=3):
             # related_synset = bn.get_synset(edge.target)
             related_synset = bn.get_synset(BabelSynsetID(str(edge.target)))
             if related_synset:
-                distractor = get_word_from_synset(related_synset.id, target_lang_code)
+                distractor = get_main_sense_from_synset(related_synset.id, target_lang_code)
                 if distractor:
                     distractor_words.add(distractor)
                     if len(distractor_words) >= num_distractors:
@@ -111,13 +115,14 @@ for tier_name, languages_in_tier in LANGUAGE_CONFIG.items():
         for word_to_translate, part_of_speech in SEED_WORDS_WITH_POS:
             #EDIT: Added the detailed print statement back in ---
             # print(f"  -> Processing '{word_to_translate}'...")
-
-            main_synset_id = get_primary_synset(word_to_translate, part_of_speech, SOURCE_LANGUAGE_ENUM)
+            # print(word_to_translate)
+            main_synset_id = get_primary_sense_synset(word_to_translate, SOURCE_LANGUAGE_STR,part_of_speech)
             if not main_synset_id:
                 # print(f"  -> Could not find main concept for '{word_to_translate}'. Skipping.")
                 continue
                 
-            correct_answer = get_word_from_synset(main_synset_id, lang_code)
+            correct_answer = get_main_sense_from_synset(main_synset_id, lang_code)
+            
             if not correct_answer:
                 # print(f"  -> Could not find translation for '{word_to_translate}'. Skipping.")
                 continue
@@ -132,13 +137,14 @@ for tier_name, languages_in_tier in LANGUAGE_CONFIG.items():
 
              # Fallback strategy in case there are NOT enough semantic distractors
             if len(distractors) < 3:
+              
                 distractor_pool = [item for item in SEED_WORDS_WITH_POS if item[0] != word_to_translate]
                 if len(distractor_pool) >= 3:
                     words_for_distractors = random.sample(distractor_pool, 3)
                     for distractor_word_en, distractor_pos in words_for_distractors:
-                        distractor_synset_id = get_primary_synset(distractor_word_en, distractor_pos, SOURCE_LANGUAGE_ENUM)
+                        distractor_synset_id = get_primary_sense_synset(distractor_word_en, SOURCE_LANGUAGE_STR, distractor_pos)
                         if distractor_synset_id:
-                            distractor = get_word_from_synset(distractor_synset_id, lang_code)
+                            distractor = get_main_sense_from_synset(distractor_synset_id, lang_code)
                             if distractor and distractor != correct_answer:
                                 distractors.add(distractor)
 
@@ -159,14 +165,14 @@ for tier_name, languages_in_tier in LANGUAGE_CONFIG.items():
                 "source_word": word_to_translate,
                 "source_lang": SOURCE_LANGUAGE_STR,
                 "target_lang": lang_code,
-                "question": f"Which word has the same meaning as the '{part_of_speech.lower()}' '{word_to_translate}' in {lang_name}?",
+                "question": f"Which word has the same meaning as the '{word_to_translate}' in {lang_name}?",
                 "choices": choices,
                 "answer": correct_answer
             }
             tier_specific_data.append(data_point)
 
     if tier_specific_data:
-        output_file_path = os.path.join(OUTPUT_DIR, f"msi_benchmark_adjs_{tier_name}.jsonl")
+        output_file_path = os.path.join(OUTPUT_DIR, f"msi_benchmark_v2_{tier_name}.jsonl")
         with open(output_file_path, "w", encoding="utf-8") as f:
             for item in tier_specific_data:
                 f.write(json.dumps(item, ensure_ascii=False) + "\n")

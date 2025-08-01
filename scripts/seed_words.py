@@ -1,6 +1,5 @@
 
-# A high-quality list of 250 common English nouns for benchmark generation.
-NOUN_SEEDS = [
+SEED_WORDS_WITH_POS = [
     ("time", "NOUN"), ("year", "NOUN"), ("people", "NOUN"), ("way", "NOUN"),
     ("day", "NOUN"), ("man", "NOUN"), ("thing", "NOUN"), ("woman", "NOUN"),
     ("life", "NOUN"), ("child", "NOUN"), ("world", "NOUN"), ("school", "NOUN"),
@@ -63,12 +62,8 @@ NOUN_SEEDS = [
     ("fire", "NOUN"), ("earth", "NOUN"), ("field", "NOUN"), ("oil", "NOUN"),
     ("property", "NOUN"), ("situation", "NOUN"), ("model", "NOUN"), ("risk", "NOUN"),
     ("character", "NOUN"), ("dog", "NOUN"), ("army", "NOUN"), ("design", "NOUN"),
-    ("material", "NOUN"), ("sun", "NOUN"), ("glass", "NOUN"), ("impact", "NOUN")
-]
+    ("material", "NOUN"), ("sun", "NOUN"), ("glass", "NOUN"), ("impact", "NOUN"),
 
-
-VERB_SEEDS = [
-    # --- VERBS (200 words) ---
     ("be", "VERB"), ("have", "VERB"), ("do", "VERB"), ("say", "VERB"),
     ("get", "VERB"), ("make", "VERB"), ("go", "VERB"), ("know", "VERB"),
     ("take", "VERB"), ("see", "VERB"), ("come", "VERB"), ("think", "VERB"),
@@ -114,10 +109,7 @@ VERB_SEEDS = [
     ("hope", "VERB"), ("read", "VERB"), ("roll", "VERB"), ("gain", "VERB"),
     ("marry", "VERB"), ("lie", "VERB"), ("save", "VERB"), ("shoot", "VERB"),
     ("close", "VERB"), ("enter", "VERB"), ("share", "VERB"), ("shoot", "VERB"),
-]
 
-ADJ_SEEDS = [
-    # --- ADJECTIVES (200 words) ---
     ("good", "ADJ"), ("new", "ADJ"), ("first", "ADJ"), ("last", "ADJ"),
     ("long", "ADJ"), ("great", "ADJ"), ("little", "ADJ"), ("own", "ADJ"),
     ("other", "ADJ"), ("old", "ADJ"), ("right", "ADJ"), ("big", "ADJ"),
