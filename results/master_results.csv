@@ -1,0 +1,13 @@
+Model,Language Tier,Accuracy,Number of Samples
+gemma-3-1b-it,High-Resource,0.45743663318986133,8364
+Llama-3.1-8B-Instruct,High-Resource,0.5656384505021521,8364
+Mistral-7B-Instruct-v0.2,High-Resource,0.5958871353419417,8364
+Qwen3-8B,High-Resource,0.5395743663318986,8364
+gemma-3-1b-it,Low-Resource,0.37877030162412995,1724
+Llama-3.1-8B-Instruct,Low-Resource,0.5029002320185615,1724
+Mistral-7B-Instruct-v0.2,Low-Resource,0.44025522041763343,1724
+Qwen3-8B,Low-Resource,0.4263341067285383,1724
+gemma-3-1b-it,Medium-Resource,0.4188749418874942,4302
+Llama-3.1-8B-Instruct,Medium-Resource,0.5364946536494654,4302
+Mistral-7B-Instruct-v0.2,Medium-Resource,0.5376569037656904,4302
+Qwen3-8B,Medium-Resource,0.5292887029288703,4302

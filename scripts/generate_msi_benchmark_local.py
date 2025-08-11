@@ -29,7 +29,8 @@ OUTPUT_DIR = "./data"
 
 # Helper functions 
 
-# The function get ALL the senses of a given word and returns the the synset ID with the closest synset to the given word. This is done by checking the lammas if the senses if they match with the target word.
+# The function get ALL the senses of a given word (Word in english and therefor the target language is english - because seed words are english words) and returns the one synset ID that has the given word. This is done by checking the lammas of the returned senses if they match with the target word.
+
 def get_primary_sense_synset(word, lang_code, pos):
     try:
         synsets = bn.get_senses(word, from_langs=[Language[lang_code]], poses=[POS[pos]], sources=[BabelSenseSource.WN])
@@ -37,7 +38,7 @@ def get_primary_sense_synset(word, lang_code, pos):
             for sense in synsets:
                 if sense.full_lemma.lower() == word.lower():
                     # print('success', word)
-                    return sense.synset_id
+                    return sense.synset_id # returns the first matching element
             print(f"No exact full_lemma match for '{word}', returning first sense as fallback.")
             return synsets[0].synset_id #fallback in case not lemmas match
             
@@ -56,7 +57,7 @@ def get_main_sense_from_synset(synset_id, target_lang_code):
         if not synset:
             return None
         main_sense = synset.main_sense(Language[target_lang_code])
-        # print(main_sense.full_lemma)
+        
         # We can now directly access the senses from the synset object
         if main_sense:
             return main_sense.full_lemma.replace("_", " ")
@@ -96,8 +97,6 @@ def get_distractors(main_synset, target_lang_code, num_distractors=3):
 
 # Main Generation Loop
 
-# benchmark_data = [] 
-
 # Updated to multilingually extend the benchmark and generate data in tiers 
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -118,16 +117,13 @@ for tier_name, languages_in_tier in LANGUAGE_CONFIG.items():
             # print(word_to_translate)
             main_synset_id = get_primary_sense_synset(word_to_translate, SOURCE_LANGUAGE_STR,part_of_speech)
             if not main_synset_id:
-                # print(f"  -> Could not find main concept for '{word_to_translate}'. Skipping.")
                 continue
                 
             correct_answer = get_main_sense_from_synset(main_synset_id, lang_code)
             
             if not correct_answer:
-                # print(f"  -> Could not find translation for '{word_to_translate}'. Skipping.")
                 continue
             
-            # print(f"  -> Found translation: '{correct_answer}'")
 
             main_synset_obj = bn.get_synset(BabelSynsetID(str(main_synset_id)))
             distractors = set(get_distractors(main_synset_obj, lang_code, num_distractors=5)) # Get a few extra
