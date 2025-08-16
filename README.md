@@ -112,7 +112,7 @@ lm_eval `
     --model_args pretrained=openai-community/gpt2,dtype=float16 `
     --tasks csi_custom_task `
     --include_path lm_harness_tasks `
-    --batch_size 8 `
+    --batch_size auto `
     --output_path ./results/harness_gpt2_results.json
 ```
 
@@ -127,7 +127,7 @@ lm_eval \
     --model_args pretrained=meta-llama/Llama-3-8B-Instruct,dtype=bfloat16 \
     --tasks csi_custom_task \
     --include_path lm_harness_tasks \
-    --batch_size 4 \
+    --batch_size auto \
     --output_path ./results/harness_llama3_results.json
 ```
 
@@ -137,7 +137,7 @@ After running, the results will be saved to the specified `.json` file in the `r
 
 - **`data/`**: Contains the generated benchmark `.jsonl` files.
 - **`lm_harness_tasks/`**: Contains the `.yaml` configuration files that define your custom tasks for the evaluation framework.
-- **`csi_data_generation_advanced.py`**: The script used to generate the benchmark data.
+- **`generate_msi_benchmark_local.py`**: The script used to generate the benchmark data.
 - **`requirements.txt`**: A list of all necessary Python packages.
 - **`.env`**: A file for storing private API keys securely.
 - **`README.md`**: This file.
