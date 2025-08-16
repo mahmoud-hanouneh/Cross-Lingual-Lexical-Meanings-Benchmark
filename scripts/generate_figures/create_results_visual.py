@@ -118,7 +118,7 @@ def plot_dataset_size(df, output_path):
 # --- Main execution ---
 if __name__ == "__main__":
     # Define the directory where your JSON result files are located
-    RESULTS_DIR = './results/Final Results' 
+    RESULTS_DIR = '././results/Final Results' 
     
     # Consolidate all results into a single DataFrame
     results_df = parse_results(RESULTS_DIR)
